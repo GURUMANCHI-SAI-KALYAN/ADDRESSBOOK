@@ -1,10 +1,14 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
-import static com.uccases.AddressBookOperations.*;
 
 class Contacts {
-    String firstName, lastName, address, city, state;
+    String firstName;
+    String lastName;
+    String address;
+    String city;
+    String state;
     long zip, phoneNumber;
 
     public Contacts(String firstName, String lastName, String address, String city, String state, long zip,
@@ -18,6 +22,9 @@ class Contacts {
         this.phoneNumber = phoneNumber;
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
 
     @Override
     public String toString() {
@@ -39,11 +46,16 @@ public class AddressBook {
         System.out.println("Welcome to AddressBook");
         ArrayList<Contacts> book = new ArrayList<>();
 
-        book.add( new Contacts("kalyan", "gurumanchi"," address","hyd", "telangana", 600005, 90000005));
-        book.add( new Contacts("tina", "henna"," address","Agra", "delhi", 60008, 985574855));
-        book.add( new Contacts("akki", "malla"," address","karimnagar", "telangana", 60005, 900025254));
-        book.add( new Contacts("geeta", "grrta"," address","munnar", "maharastra", 600225, 958447452));
-        book.add( new Contacts("arivand", "allu"," address","manali", "hp", 605852, 701365587));
+        book.add(new Contacts("purushoth", "kabaddi", " address", "chennai",
+                "tamilnadu", 607003, 9488806205l));
+        book.add(new Contacts("babu", "Sail", " address", "mumbai",
+                "maharastra", 607007, 9488806205l));
+        book.add(new Contacts("appu", "Jana", " address", "bangalore",
+                "karnataka", 607403, 9488806205l));
+        book.add(new Contacts("seetha", "lakshmi", " address", "chennai",
+                "maharastra", 607083, 9488806205l));
+        book.add(new Contacts("siva", "nantham", " address", "kolkata",
+                "west bengal", 607903, 9488806205l));
 
         Scanner input = new Scanner(System.in);
         String check = "y";
@@ -71,11 +83,16 @@ public class AddressBook {
                 case 6:
                     AddressBookOperations.countByCityorState(input,book);
                     break;
+                case 7 :
+                    Collections.sort(book,(p1, p2)->{
+                        return p1.firstName.compareTo(p2.firstName);
+                    });
+                    book.stream().forEach(n -> System.out.println(n));
             }
             System.out.println("Do you want to perform any other option ?press(y/n)");
             check = input.next();
         }
-        System.out.println(book);
+        book.stream().forEach(n -> System.out.println(n));
     }
 
 
